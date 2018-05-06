@@ -1,13 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './style.css'
-import logo from '../../logo.svg';
+import logo from '../../resources/logo.svg';
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
   return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Lappleken</h1>
+    <div className='header'>
+      <Link to="/">
+        <img src={logo} className="header-logo" alt="logo" />
+      </Link>
+      <h1 className="header-title">Lappleken</h1>
     </div>
   )
 }

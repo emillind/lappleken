@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Splash from './components/Splash'
 import NewGame from './components/NewGame'
 import JoinGame from './components/JoinGame'
+import Header from './components/Header'
 import './App.css';
 
 class App extends Component {
@@ -18,10 +19,13 @@ const Routes = () => (
   <Layout>
     <BrowserRouter>
       <div>
+        <Header/>
+      <Switch>
         <Route exact path="/" component={Splash} />
         <Route exact path="/newgame" component={NewGame} />
         <Route exact path="/joingame" component={JoinGame} />
-      </div>
+      </Switch>
+    </div>
     </BrowserRouter>
   </Layout>
 )

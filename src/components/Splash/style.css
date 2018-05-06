@@ -1,0 +1,30 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 20vh;
+}
+
+.control {
+  height: 50px;
+  width: 350px;
+  background-color: #333;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control:active {
+  background-color: #555;
+}
+
+.control:hover {
+  background-color: #555;
+}
+
+a {
+  text-decoration: none;
+}

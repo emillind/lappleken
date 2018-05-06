@@ -1,0 +1,13 @@
+.form-label {
+  width: 60vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+#id-label {
+  margin: 0;
+  font-size: 1em;
+}

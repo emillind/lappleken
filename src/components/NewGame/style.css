@@ -1,0 +1,74 @@
+.content {
+  padding-left: 20vw;
+  padding-right: 20vw;
+  width: 60vw;
+  text-align: left;
+}
+
+.form-title {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.games {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #222;
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.game {
+  width: 55vw;
+  height: 30px;
+  padding: 5px 10px 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-description {
+  margin: 3px;
+  font-size: 0.8em;
+  font-weight: lighter;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmark {
+  height: 15px;
+  width: 15px;
+}
+
+.game-name {
+  margin: 0;
+}
+
+.start {
+  height: 30px;
+  background-color: black;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid white;
+}
