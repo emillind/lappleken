@@ -1,3 +1,12 @@
+export const getGames = () => {
+  return availableGames.map(game => (
+    {
+      checked: false,
+      ...game
+    }
+  ))
+}
+
 const availableGames = [
   {
     name: 'Med andra ord',
@@ -16,12 +25,3 @@ const availableGames = [
     description: 'Du ska, utan att göra gester, beskriva ordet genom att nynna med stängd mun.'
   }
 ]
-
-export const getGames = () => {
-  return availableGames.map(game => (
-    {
-      checked: false,
-       ...game
-     }
-   ))
-}

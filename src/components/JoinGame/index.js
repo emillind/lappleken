@@ -16,7 +16,9 @@ class JoinGame extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    console.log(this.state.id)
+    let { history } = this.props
+    let redirectURL = '/game/' + this.state.id + '/enter'
+    history.push(redirectURL)
   }
 
   render () {
