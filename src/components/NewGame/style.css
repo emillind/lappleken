@@ -60,6 +60,7 @@
 
 .game-name {
   margin: 0;
+  text-decoration: underline;
 }
 
 .start {
