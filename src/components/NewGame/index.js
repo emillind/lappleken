@@ -1,29 +1,7 @@
 import React from 'react'
 import './style.css'
 import check from '../../resources/check.svg'
-
-const availableGames = [
-  {
-    name: 'Med andra ord',
-    description: 'Lorem ipsum...'
-  },
-  {
-    name: 'Med ett ord',
-    description: 'Lorem ipsum...'
-  },
-  {
-    name: 'Charader',
-    description: 'Lorem ipsum..'
-  },
-  {
-    name: 'Nynna',
-    description: 'Lorem ipsum..'
-  }
-]
-
-const getGames = () => {
-  return availableGames.map(game => Object.assign(game, {checked: false}))
-}
+import { getGames } from '../../services/games'
 
 class NewGame extends React.Component {
   constructor (props) {
@@ -57,6 +35,26 @@ class NewGame extends React.Component {
     this.setState({games: newGames})
   }
 
+  gamesList(games) {
+    return games.map((game, i) => {
+      return (
+        <div key={i} className='box'>
+          <div className='game'>
+            <p className='game-name'>{game.name}
+            </p>
+            <a onClick={(e) => this.handleClick(e, game.name)}>
+              <div className='checkbox'>
+                {game.checked ? (<img src={check} className="checkmark" alt="checkmark" />) : ''}
+              </div>
+            </a>
+          </div>
+          <p className='game-description'>{game.description}
+          </p>
+        </div>
+      )
+    })
+  }
+
   render () {
     let { games } = this.state
     return (
@@ -65,23 +63,7 @@ class NewGame extends React.Component {
         <input className='text-input' value={this.state.name} onChange={this.handleChange}/>
         <h2 className='form-title'>Delgrenar</h2>
         <div className='games'>
-          {games.map((game, i) => {
-            return (
-              <div key={i} className='box'>
-                <div className='game'>
-                  <p className='game-name'>{game.name}
-                  </p>
-                  <a onClick={(e) => this.handleClick(e, game.name)}>
-                    <div className='checkbox'>
-                      {game.checked ? (<img src={check} className="checkmark" alt="checkmark" />) : ''}
-                    </div>
-                  </a>
-                </div>
-                <p className='game-description'>{game.description}
-                </p>
-              </div>
-            )
-          })}
+          {this.gamesList(games)}
         </div>
         <a onClick={this.handleStart}>
           <div className='start'>Starta omgång</div>
