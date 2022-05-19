@@ -1,12 +1,12 @@
-import axios from "axios"
+import axios from 'axios'
 
-export const setupGame = (name: string, teamSize: number, notes: number): Promise<any> => {
+export const setupGame = (name: string, noOfTeams: number, noOfNotes: number): Promise<any> => {
   const game = {
     name,
-    teamSize,
-    notes,
+    noOfTeams,
+    noOfNotes,
   }
-  return axios.post("http://192.168.1.8:3001/createGame", game)
+  return axios.put('http://localhost:3001/game', game)
 }
 
 interface IGameState {
