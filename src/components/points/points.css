@@ -1,0 +1,21 @@
+.points {
+  width: 100%;
+  margin-top: 30px;
+  border-top: 2px solid white;
+  text-align: center;
+}
+
+.title {
+  margin: 30px 0;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  padding: 0 60px;
+}
+
+.team {
+  text-align: left;
+  margin-bottom: 15px;
+}

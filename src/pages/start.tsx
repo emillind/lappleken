@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/input'
 import './start.css'
+import Points from '../components/points'
 
 function Start() {
   const [name, setName] = useState('')
