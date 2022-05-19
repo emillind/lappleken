@@ -1,8 +1,14 @@
 const express = require('express')
-var cors = require('cors')
+const cors = require('cors')
+const bodyParser = require('body-parser');
 const app = express()
 const port = 3001
-let games = {}
+let games = {
+  123:{
+    notes:["one", "two", "three"],
+    gameId:"123"
+  }
+}
 
 app.use(cors())
 app.use(express.json())
@@ -21,6 +27,21 @@ app.put('/game', (req, res) => {
     notes: [],
   }
   res.send(id)
+})
+
+app.post("/addNotes", (req, res) => {
+  const gameId = req.body.gameId
+  const notes = req.body.notes
+  if(!games[gameId]){
+    res.status(400).send("Could not find game id")
+  }
+  if(!notes || notes.length === 0){
+    res.status(400).send("No notes provided")
+  }
+  notes.forEach(note => {
+    games[gameId].notes.push(note)
+  });
+  res.send("Notes added successfully")
 })
 
 app.get('/game/:id', (req, res) => {
