@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 
 function Start() {
   const [name, setName] = useState('')
-  const [teamSize, setTeamSize] = useState(2)
-  const [notes, setNotes] = useState(3)
+  const [teamCount, setTeamCount] = useState(2)
+  const [noteCount, setNoteCount] = useState(3)
   const navigate = useNavigate()
 
   const startGame = () => {
     let id
-    setupGame(name, teamSize, notes)
+    setupGame(name, teamCount, noteCount)
     .then(res => {
       id = res.data
       navigate(`/${id}`, { replace: true })
@@ -39,8 +39,8 @@ function Start() {
           type="number"
           name="team-size"
           id="team-size"
-          value={teamSize}
-          onChange={(e) => setTeamSize(parseInt(e.target.value, 10))}
+          value={teamCount}
+          onChange={(e) => setTeamCount(parseInt(e.target.value, 10))}
         />
       </div>
 
@@ -50,8 +50,8 @@ function Start() {
           type="number"
           name="note-count"
           id="note-count"
-          value={notes}
-          onChange={(e) => setNotes(parseInt(e.target.value, 10))}
+          value={noteCount}
+          onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
         />
       </div>
 
