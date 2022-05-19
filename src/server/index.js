@@ -41,6 +41,6 @@ const createId = () => {
   for (let i = 0; i < 6; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
-  if (Object.keys(games).includes(result)) return createId()
+  if (games[result]) return createId()
   return result
 }
