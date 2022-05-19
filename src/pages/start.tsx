@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 
 function Start() {
   const [name, setName] = useState('')
-  const [teamSize, setTeamSize] = useState(2)
-  const [notes, setNotes] = useState(3)
+  const [teamCount, setTeamCount] = useState(2)
+  const [noteCount, setNoteCount] = useState(3)
   const navigate = useNavigate()
 
   const startGame = () => {
     // TODO: Backend call
-    const id = setupGame(name, teamSize, notes)
+    const id = setupGame(name, teamCount, noteCount)
 
     navigate(`/${id}`, { replace: true })
   }

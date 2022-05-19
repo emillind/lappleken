@@ -19,9 +19,34 @@ function Notes() {
     fetchGame()
   }, [id])
 
+  const sendNotes = () => {
+    // TODO
+  }
+
   return (
     <div>
       Game id: {id}, Notes: [{notes.map((note) => note + ', ')}]
+      {notes.map((note, i) => {
+        const noteId = 'note-' + i
+        return (
+          <div key={noteId}>
+            <br />
+            <input
+              type="text"
+              name={noteId}
+              id={noteId}
+              value={note}
+              onChange={(e) => {
+                const newNotes = [...notes]
+                newNotes[i] = e.currentTarget.value
+                setNotes(newNotes)
+              }}
+            />
+          </div>
+        )
+      })}
+      {/* TODO: DISABLE */}
+      <button onClick={sendNotes}>Send notes</button>
     </div>
   )
 }
