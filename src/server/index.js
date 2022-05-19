@@ -1,18 +1,54 @@
 const express = require('express')
-var cors = require('cors')
+const cors = require('cors')
+const bodyParser = require('body-parser');
 const app = express()
 const port = 3001
-let games = {}
+let games = {
+  123:{
+    notes:["one", "two", "three"],
+    gameId:"123"
+  }
+}
 
 app.use(cors())
+app.use(express.json())
 
-app.post('/createGame', (req, res) => {
+app.put('/game', (req, res) => {
+  const { name, noOfTeams, noOfNotes } = req.body
   const id = createId()
+  if (!name || !noOfTeams || !noOfNotes) {
+    res.status(400).send('Please supply name, noOfTeams and noOfNotes')
+  }
   games[id] = {
-    notes:[],
-    numOfTeams: req.params.numOfTeams
+    id: id,
+    name,
+    noOfNotes,
+    noOfTeams,
+    notes: [],
   }
   res.send(id)
+})
+
+app.post("/addNotes", (req, res) => {
+  const gameId = req.body.gameId
+  const notes = req.body.notes
+  if(!games[gameId]){
+    res.status(400).send("Could not find game id")
+  }
+  if(!notes || notes.length === 0){
+    res.status(400).send("No notes provided")
+  }
+  notes.forEach(note => {
+    games[gameId].notes.push(note)
+  });
+  res.send("Notes added successfully")
+})
+
+app.get('/game/:id', (req, res) => {
+  const id = req.params.id
+  const game = games[id]
+  if (game) res.send(game)
+  res.status(404).send('Could not find game with id ' + id)
 })
 
 app.listen(port, () => {
@@ -26,5 +62,6 @@ const createId = () => {
   for (let i = 0; i < 6; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
-  return result;
+  if (games[result]) return createId()
+  return result
 }
