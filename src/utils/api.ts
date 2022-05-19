@@ -1,4 +1,4 @@
-export const setupGame = (name: string, teamSize: number, notes: number) => {
+export const setupGame = (name: string, teamSize: number, notes: number): Promise<string> => {
   // TODO: Backend call
   let result = ''
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -6,5 +6,17 @@ export const setupGame = (name: string, teamSize: number, notes: number) => {
   for (let i = 0; i < 6; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
-  return result
+  return Promise.resolve(result)
+}
+
+interface IGameState {
+  noteCount: number
+}
+
+export const getGameState = (id: string): Promise<IGameState> => {
+  // TODO: Backend call
+  const mockResult = {
+    noteCount: 3,
+  }
+  return Promise.resolve(mockResult)
 }
