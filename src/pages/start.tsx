@@ -34,8 +34,8 @@ function Start() {
           type="number"
           name="team-size"
           id="team-size"
-          value={teamSize}
-          onChange={(e) => setTeamSize(parseInt(e.target.value, 10))}
+          value={teamCount}
+          onChange={(e) => setTeamCount(parseInt(e.target.value, 10))}
         />
       </div>
 
@@ -45,8 +45,8 @@ function Start() {
           type="number"
           name="note-count"
           id="note-count"
-          value={notes}
-          onChange={(e) => setNotes(parseInt(e.target.value, 10))}
+          value={noteCount}
+          onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
         />
       </div>
 
