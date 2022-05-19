@@ -1,12 +1,12 @@
-export const setupGame = (name: string, teamSize: number, notes: number): Promise<string> => {
-  // TODO: Backend call
-  let result = ''
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  const charactersLength = characters.length
-  for (let i = 0; i < 6; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+import axios from "axios"
+
+export const setupGame = (name: string, teamSize: number, notes: number): Promise<any> => {
+  const game = {
+    name,
+    teamSize,
+    notes,
   }
-  return Promise.resolve(result)
+  return axios.post("http://192.168.1.8:3001/createGame", game)
 }
 
 interface IGameState {

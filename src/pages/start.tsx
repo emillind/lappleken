@@ -9,10 +9,15 @@ function Start() {
   const navigate = useNavigate()
 
   const startGame = () => {
-    // TODO: Backend call
-    const id = setupGame(name, teamSize, notes)
-
-    navigate(`/${id}`, { replace: true })
+    let id
+    setupGame(name, teamSize, notes)
+    .then(res => {
+      id = res.data
+      navigate(`/${id}`, { replace: true })
+    })
+    .catch(err => {
+      alert(err)
+    })
   }
 
   return (
