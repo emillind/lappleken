@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { setupGame } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/button'
+import Input from '../components/input'
+import './start.css'
 
 function Start() {
   const [name, setName] = useState('')
@@ -11,51 +14,34 @@ function Start() {
   const startGame = () => {
     let id
     setupGame(name, teamCount, noteCount)
-    .then(res => {
-      id = res.data
-      navigate(`/${id}`, { replace: true })
-    })
-    .catch(err => {
-      alert(err)
-    })
+      .then((res) => {
+        id = res.data
+        navigate(`/${id}`, { replace: true })
+      })
+      .catch((err) => {
+        alert(err)
+      })
   }
 
   return (
-    <div>
-      <div>
-        <label htmlFor="name">Name of the game</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
+    <div className="start">
+      <Input
+        label="Name of the game"
+        id="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        type="text"
+      />
 
-      <div>
-        <label htmlFor="team-size">Team size</label>
-        <input
-          type="number"
-          name="team-size"
-          id="team-size"
-          value={teamCount}
-          onChange={(e) => setTeamCount(parseInt(e.target.value, 10))}
-        />
-      </div>
+      <Input
+        label="Notes per person"
+        id="note-count"
+        value={noteCount}
+        onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
+        type="number"
+      />
 
-      <div>
-        <label htmlFor="note-count">Notes per person</label>
-        <input
-          type="number"
-          name="note-count"
-          id="note-count"
-          value={noteCount}
-          onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
-        />
-      </div>
-
-      <button onClick={startGame}>Start game</button>
+      <Button onClick={startGame} text="Start game" />
     </div>
   )
 }
