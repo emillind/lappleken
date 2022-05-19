@@ -6,7 +6,7 @@ export const setupGame = (name: string, teamSize: number, notes: number): Promis
     teamSize,
     notes,
   }
-  return axios.post("http://192.168.1.8:3001/createGame", game)
+  return axios.post("http://127.0.0.1:3001/createGame", game)
 }
 
 interface IGameState {
