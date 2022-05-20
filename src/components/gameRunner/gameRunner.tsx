@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ITeam } from '../../types'
 import Button from '../button'
+import Timer from '../timer/timer'
 import './gameRunner.css'
 
 interface GameRunnerProps {
@@ -9,26 +10,37 @@ interface GameRunnerProps {
 
 function GameRunner({ teams }: GameRunnerProps) {
   const [activeRound, setActiveRound] = useState(false)
-
-  const getNextTeam = () => {
-    return teams.find((team) => team.next)?.name
-  }
-
-  const getActiveTeam = () => {
-    return teams.find((team) => team.active)?.name
-  }
-
+  const [activeTeam, setActiveTeam] = useState(teams[0].name)
+  const [teamsLeft, setTeamsLeft] = useState(teams.filter((_, i) => i !== 0))
+  
   const startRoundHandler = () => {
-    // TODO
+      setActiveRound(true)
+  }
+
+  const finishRound = () => {
+    if(teamsLeft.length > 0){
+      const teams = teamsLeft
+      const nextTeam = teams.shift()
+      if(nextTeam){
+        setActiveTeam(nextTeam.name)
+      }
+      setTeamsLeft(teams)
+    }else{
+      alert("No more teams")
+    }
   }
 
   if (activeRound) {
-    return <div className="game-runner"></div>
+    return (
+    <div className="game-runner">
+      {activeTeam}
+      <Timer setActiveRound={setActiveRound} finishRound={finishRound}/>
+    </div>)
   }
 
   return (
     <div className="game-runner">
-      <h1>Next round {getNextTeam()}</h1>
+      <h1>Next round {activeTeam}</h1>
       <Button text="Start round" onClick={startRoundHandler} />
     </div>
   )

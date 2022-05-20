@@ -59,7 +59,10 @@ app.post('/addNotes', (req, res) => {
 app.get('/game/:id', (req, res) => {
   const id = req.params.id
   const game = games[id]
-  if (game) res.send(game)
+  if (game){
+    res.send(game)
+    return
+  }
   res.status(404).send('Could not find game with id ' + id)
 })
 
@@ -68,10 +71,11 @@ app.patch('/startGame/:id', (req, res) => {
   const game = games[id]
   if (game) {
     game.started = true
-    game.teams[0].next = true
     res.send('Started game')
+    return
   }
   res.status(404).send('Could not find game with id ' + id)
+  
 })
 
 app.listen(port, () => {
