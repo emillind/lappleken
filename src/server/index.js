@@ -68,6 +68,7 @@ app.patch('/startGame/:id', (req, res) => {
   const game = games[id]
   if (game) {
     game.started = true
+    game.teams[0].next = true
     res.send('Started game')
   }
   res.status(404).send('Could not find game with id ' + id)

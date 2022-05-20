@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from '../components/button'
+import GameRunner from '../components/gameRunner'
 import Points from '../components/points'
-import { getGameState, IGameState } from '../utils/api'
+import { getGameState, IGameState, startGame } from '../utils/api'
 import './game.css'
 
 function Game() {
@@ -19,9 +20,10 @@ function Game() {
     fetchGame()
   }, [id])
 
-  const startGame = () => {
-    alert('start')
-    setStarted(true)
+  const gameStartHandler = async () => {
+    if (id) {
+      startGame(id).then(() => setStarted(true))
+    }
   }
 
   if (!gameState) return <div className="game">Could not find game with ID {id}</div>
@@ -35,13 +37,14 @@ function Game() {
           <br />
           There are currently {gameState.notes.length} notes in the game
         </p>
-        <Button text="Start game" onClick={startGame} />
+        <Button text="Start game" onClick={gameStartHandler} />
       </div>
     )
   }
 
   return (
     <div className="game">
+      <GameRunner teams={gameState.teams} />
       <Points teams={gameState.teams} />
     </div>
   )

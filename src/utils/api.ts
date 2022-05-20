@@ -22,6 +22,10 @@ export const getGameState = (id: string): Promise<IGameState> => {
   return axios.get('http://localhost:3001/game/' + id).then((res) => res.data)
 }
 
+export const startGame = (id: string): Promise<any> => {
+  return axios.patch('http://localhost:3001/startGame/' + id)
+}
+
 export const addNotesToGame = (gameId: string, notes: string[]): Promise<any> => {
   const body = {
     id: gameId,
