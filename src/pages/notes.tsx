@@ -1,62 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Button from '../components/button'
+import ListInput from '../components/listInput'
 import { getGameState } from '../utils/api'
+import './notes.css'
 
 function Notes() {
   const { id } = useParams()
-  const [ notesLimit, setNotesLimit ] = useState(0)
-  const [ noteTextEntry, setNoteTextEntry ] = useState('')
-  const [ stagedNotes, setStagedNotes ] = useState<string[]>([])
+  const [noOfNotes, setNoOfNotes] = useState(0)
+  const [stagedNotes, setStagedNotes] = useState<string[]>([])
 
   useEffect(() => {
     const fetchGame = async () => {
       if (!id) return
-      const { noteCount } = await getGameState(id)
-      setNotesLimit(noteCount)
+      const gameState = await getGameState(id)
+      setNoOfNotes(gameState.noOfNotes)
     }
     fetchGame()
   }, [id])
 
   const sendNotes = () => {
     // TODO
+    alert(stagedNotes)
   }
 
-  return notesLimit === 0 ? 
-  <div/> 
-  :
-  (
-    <div>
-      <div>
-        <label htmlFor="note-input">Add new note</label>
-        <input 
-          type="text" 
-          placeholder="e.g. Albert Einstein"
-          id="note-input"
-          value={noteTextEntry}
-          onChange={(e) => setNoteTextEntry(e.target.value)}
-        />
-        <button onClick={() => {
-          setStagedNotes([...stagedNotes, noteTextEntry])
-        }}>
-          Add note
-        </button>
-      </div>
+  return (
+    <div className="notes">
+      <ListInput
+        showInput={noOfNotes > stagedNotes.length || noOfNotes === 0}
+        formLabel="Add new note"
+        list={stagedNotes}
+        setList={setStagedNotes}
+      />
 
-      {stagedNotes.map((noteText, noteIndex)=> (
-        <div key={noteText}>
-          <div>
-            {noteText}
-          </div>
-          <button onClick={
-            e => {
-              setStagedNotes(stagedNotes.filter((_, index) => index !== noteIndex))
-            }} >
-            Remove
-          </button>
-        </div>
-      ))}
-
-      <button onClick={sendNotes}>Enter notes</button>
+      <Button text="Enter notes" onClick={sendNotes} disabled={stagedNotes.length !== noOfNotes} />
     </div>
   )
 }

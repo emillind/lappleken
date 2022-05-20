@@ -1,47 +1,50 @@
 const express = require('express')
 const cors = require('cors')
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const app = express()
 const port = 3001
 let games = {
-  123:{
-    notes:["one", "two", "three"],
-    gameId:"123"
-  }
+  123: {
+    notes: ['one', 'two', 'three'],
+    id: '123',
+    teams: ['Team 1', 'Team 2', 'Team 3'],
+    noOfNotes: 2,
+    name: 'Test game',
+  },
 }
 
 app.use(cors())
 app.use(express.json())
 
 app.put('/game', (req, res) => {
-  const { name, noOfTeams, noOfNotes } = req.body
+  const { name, teams, noOfNotes } = req.body
   const id = createId()
-  if (!name || !noOfTeams || !noOfNotes) {
-    res.status(400).send('Please supply name, noOfTeams and noOfNotes')
+  if (!name || !teams || !noOfNotes) {
+    res.status(400).send('Please supply name, teams and noOfNotes')
   }
   games[id] = {
     id: id,
     name,
     noOfNotes,
-    noOfTeams,
+    teams,
     notes: [],
   }
   res.send(id)
 })
 
-app.post("/addNotes", (req, res) => {
+app.post('/addNotes', (req, res) => {
   const gameId = req.body.gameId
   const notes = req.body.notes
-  if(!games[gameId]){
-    res.status(400).send("Could not find game id")
+  if (!games[gameId]) {
+    res.status(400).send('Could not find game id')
   }
-  if(!notes || notes.length === 0){
-    res.status(400).send("No notes provided")
+  if (!notes || notes.length === 0) {
+    res.status(400).send('No notes provided')
   }
-  notes.forEach(note => {
+  notes.forEach((note) => {
     games[gameId].notes.push(note)
-  });
-  res.send("Notes added successfully")
+  })
+  res.send('Notes added successfully')
 })
 
 app.get('/game/:id', (req, res) => {

@@ -5,16 +5,17 @@ import Button from '../components/button'
 import Input from '../components/input'
 import './start.css'
 import Points from '../components/points'
+import ListInput from '../components/listInput'
 
 function Start() {
   const [name, setName] = useState('')
-  const [teamCount, setTeamCount] = useState(2)
+  const [teams, setTeams] = useState<string[]>([])
   const [noteCount, setNoteCount] = useState(3)
   const navigate = useNavigate()
 
   const startGame = () => {
     let id
-    setupGame(name, teamCount, noteCount)
+    setupGame(name, teams, noteCount)
       .then((res) => {
         id = res.data
         navigate(`/${id}`, { replace: true })
@@ -41,6 +42,8 @@ function Start() {
         onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
         type="number"
       />
+
+      <ListInput formLabel="Add team" list={teams} setList={setTeams} showInput />
 
       <Button onClick={startGame} text="Start game" />
     </div>

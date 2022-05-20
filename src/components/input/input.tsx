@@ -7,9 +7,10 @@ interface InputProps {
   value: any
   type: string
   id: string
+  placeholder?: string
 }
 
-function Input({ label, id, type, value, onChange }: InputProps) {
+function Input({ label, id, type, value, onChange, placeholder }: InputProps) {
   return (
     <div className="wrapper">
       {label && (
@@ -17,7 +18,15 @@ function Input({ label, id, type, value, onChange }: InputProps) {
           {label}
         </label>
       )}
-      <input className="input" type={type} name={id} id={id} value={value} onChange={onChange} />
+      <input
+        className="input"
+        placeholder={placeholder}
+        type={type}
+        name={id}
+        id={id}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   )
 }

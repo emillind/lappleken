@@ -6,3 +6,8 @@
   color: white;
   padding: 0 15px;
 }
+
+.button:disabled,
+.button[disabled] {
+  background-color: #cccccc;
+}
