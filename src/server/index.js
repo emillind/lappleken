@@ -33,7 +33,7 @@ app.put('/game', (req, res) => {
 })
 
 app.post('/addNotes', (req, res) => {
-  const gameId = req.body.gameId
+  const gameId = req.body.id
   const notes = req.body.notes
   if (!games[gameId]) {
     res.status(400).send('Could not find game id')

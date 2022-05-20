@@ -13,18 +13,18 @@ interface IGameState {
   id: string
   name: string
   noOfNotes: number
-  noOfTeams: number
+  teams: string[]
   notes: string[]
 }
 
 export const getGameState = (id: string): Promise<IGameState> => {
-  // TODO: Backend call
-  const mockResult = {
-    id: '123',
-    name: 'Nytt spel',
-    noOfNotes: 3,
-    noOfTeams: 4,
-    notes: [],
+  return axios.get('http://localhost:3001/game/' + id).then((res) => res.data)
+}
+
+export const addNotesToGame = (gameId: string, notes: string[]): Promise<any> => {
+  const body = {
+    id: gameId,
+    notes,
   }
-  return Promise.resolve(mockResult)
+  return axios.post('http://localhost:3001/addNotes', body)
 }
