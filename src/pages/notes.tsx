@@ -2,6 +2,7 @@ import { response } from 'express'
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from '../components/button'
+import Header from '../components/header'
 import ListInput from '../components/listInput'
 import { addNotesToGame, getGameState } from '../utils/api'
 import './notes.css'
@@ -32,16 +33,23 @@ function Notes() {
   if (done) return <div className="notes">Thank you</div>
 
   return (
-    <div className="notes">
-      <ListInput
-        showInput={noOfNotes > stagedNotes.length || noOfNotes === 0}
-        formLabel="Add new note"
-        list={stagedNotes}
-        setList={setStagedNotes}
-      />
+    <>
+      <Header />
+      <div className="notes">
+        <ListInput
+          showInput={noOfNotes > stagedNotes.length || noOfNotes === 0}
+          formLabel="Add new note"
+          list={stagedNotes}
+          setList={setStagedNotes}
+        />
 
-      <Button text="Enter notes" onClick={sendNotes} disabled={stagedNotes.length !== noOfNotes} />
-    </div>
+        <Button
+          text="Enter notes"
+          onClick={sendNotes}
+          disabled={stagedNotes.length !== noOfNotes}
+        />
+      </div>
+    </>
   )
 }
 

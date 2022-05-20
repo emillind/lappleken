@@ -13,7 +13,7 @@ function Points({ teams }: PointsProps) {
       <div className="teams">
         {teams.map(({ name, points }) => {
           return (
-            <p className="team">
+            <p key={name} className="team">
               <strong>{name}</strong>: {points}
             </p>
           )

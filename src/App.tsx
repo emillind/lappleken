@@ -9,7 +9,6 @@ import './App.css'
 export default function App() {
   return (
     <div className="page">
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Start />}></Route>

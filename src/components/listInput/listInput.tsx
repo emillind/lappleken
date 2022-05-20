@@ -26,7 +26,7 @@ function ListInput({ formLabel, list, setList, showInput }: ListInputProps) {
   return (
     <div className="list-input">
       {showInput && (
-        <form onSubmit={addListItem}>
+        <form autoComplete="off" onSubmit={addListItem}>
           <Input
             id="note-input"
             label={formLabel}

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/input'
 import './start.css'
-import Points from '../components/points'
 import ListInput from '../components/listInput'
+import Header from '../components/header'
 
 function Start() {
   const [name, setName] = useState('')
@@ -26,27 +26,30 @@ function Start() {
   }
 
   return (
-    <div className="start">
-      <Input
-        label="Name of the game"
-        id="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        type="text"
-      />
+    <>
+      <Header />
+      <div className="start">
+        <Input
+          label="Name of the game"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        />
 
-      <Input
-        label="Notes per person"
-        id="note-count"
-        value={noteCount}
-        onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
-        type="number"
-      />
+        <Input
+          label="Notes per person"
+          id="note-count"
+          value={noteCount}
+          onChange={(e) => setNoteCount(parseInt(e.target.value, 10))}
+          type="number"
+        />
 
-      <ListInput formLabel="Add team" list={teams} setList={setTeams} showInput />
+        <ListInput formLabel="Add team" list={teams} setList={setTeams} showInput />
 
-      <Button onClick={startGame} text="Start game" />
-    </div>
+        <Button onClick={startGame} text="Start game" />
+      </div>
+    </>
   )
 }
 

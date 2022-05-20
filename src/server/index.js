@@ -7,9 +7,14 @@ let games = {
   123: {
     notes: ['one', 'two', 'three'],
     id: '123',
-    teams: ['Team 1', 'Team 2', 'Team 3'],
+    teams: [
+      { name: 'Team 1', points: 10 },
+      { name: 'Team 2', points: 18 },
+      { name: 'Team 3', points: 14 },
+    ],
     noOfNotes: 2,
     name: 'Test game',
+    started: false,
   },
 }
 
@@ -26,8 +31,9 @@ app.put('/game', (req, res) => {
     id: id,
     name,
     noOfNotes,
-    teams,
+    teams: teams.map((team) => ({ name: team, points: 0 })),
     notes: [],
+    started: false,
   }
   res.send(id)
 })
@@ -41,6 +47,9 @@ app.post('/addNotes', (req, res) => {
   if (!notes || notes.length === 0) {
     res.status(400).send('No notes provided')
   }
+  if (games[gameId].started) {
+    res.status(400).send('Game has already started')
+  }
   notes.forEach((note) => {
     games[gameId].notes.push(note)
   })
@@ -51,6 +60,16 @@ app.get('/game/:id', (req, res) => {
   const id = req.params.id
   const game = games[id]
   if (game) res.send(game)
+  res.status(404).send('Could not find game with id ' + id)
+})
+
+app.patch('/startGame/:id', (req, res) => {
+  const id = req.params.id
+  const game = games[id]
+  if (game) {
+    game.started = true
+    res.send('Started game')
+  }
   res.status(404).send('Could not find game with id ' + id)
 })
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ITeam } from '../types'
 
 export const setupGame = (name: string, teams: string[], noOfNotes: number): Promise<any> => {
   const game = {
@@ -9,11 +10,11 @@ export const setupGame = (name: string, teams: string[], noOfNotes: number): Pro
   return axios.put('http://localhost:3001/game', game)
 }
 
-interface IGameState {
+export interface IGameState {
   id: string
   name: string
   noOfNotes: number
-  teams: string[]
+  teams: ITeam[]
   notes: string[]
 }
 
